@@ -39,13 +39,12 @@
 		</dependency>
 		 -->
 	
-		<!-- 추가적인 부분 End -->	
-
+		<!-- 추가적인 부분 End -->
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
-
 		 <!-- 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
