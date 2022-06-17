@@ -18,8 +18,10 @@
 	    <input type="email" class="form-control" placeholder="Enter email" id="email" />
 	  </div>
 	  
-	  <button type="button" class="btn btn-primary">회원가입</button>
+	  <button id="btn-save" type="button" class="btn btn-primary">회원가입</button>
 	</form>
 </div>
 <br/>
+<script src="/blog/js/user.js"></script>
+
 <%@ include file="../layout/footer.jsp" %>
