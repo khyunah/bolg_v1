@@ -16,4 +16,9 @@ public class TempControllerTest {
 		System.out.println("tempHome()");
 		return "/home.html";
 	}
+	
+	@GetMapping("/temp/myhome")
+	public String myhome() {
+		return "/myhome.html";
+	}
 }
