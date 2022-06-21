@@ -12,7 +12,37 @@ let index = {
 			password: $("#password").val(),
 			email: $("#email").val()
 		}
-		console.log(data);
+		// console.log(data);
+		
+		// ajax() 호출 
+		$.ajax({
+			// 서버측에 회원가입 요청 (로직)
+			type: "POST",
+			url: "/blog/api/user",
+			// 자바와 js는 오브젝트 타입이 다른데 밑의 코드가 자동으로 파싱해준다.
+			data: JSON.stringify(data),
+			contentType: "application/json; charset=utf-8",
+			dataType: "json" // 작성하지않아도 기본값 json임.
+			// 응답이 왔을때 기본 데이터 타입 버퍼드 문자열로 받아서 js object로 자동으로 변환
+			
+		}).done(function(data, textStatus, xhr){
+			// 통신 성공시
+			console.log("xhr : " + xhr);
+			console.log(xhr);
+			console.log("textStatus : " + textStatus);
+			console.log("data : " + data);
+			
+			alert("회원가입이 완료 되었습니다.");
+			
+			// 주소 요청해서 이동
+			location.href = "/blog";
+			
+		}).fail(function(error){
+			// 통신 실패시
+			console.log(error);
+			
+			alert("회원가입에 실패했습니다.");
+		});
 	}
 	
 }

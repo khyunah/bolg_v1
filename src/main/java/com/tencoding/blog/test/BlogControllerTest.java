@@ -1,4 +1,4 @@
-package com.tencoding.blog.controller;
+package com.tencoding.blog.test;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
