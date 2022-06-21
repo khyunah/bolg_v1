@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	function validateForm(){
+		let x = document.forms["myForm"]["fname"].value;
+		if(x == ""){
+			alert("값을 입력해주세요.");
+			return false;
+		} else {
+			// 자바 스크립트 코드로 통신 요청 하면 됨
+			// GET, POST, DELETE, PUT
+			// ajax 비동기 통신 처리 예정 
+			/*
+				데이터 유효성 검사
+				- 사용자가 모든 필수 필드를 채웠는지
+				- 사용자가 유효한 날짜를 입력 했는지 확인
+				- 사용자가 숫자 필드에 텍스트를 입력했는지 확인
+			
+				웹 프로그래밍 할때 유효성 검사는 해야하는데
+				자바스크립트 에서 한번, 서버측에서도 한번 해야한다. ( 위, 변조가 일어나기때문에 두번 체크 해줘야 한다. )
+				서버측 유효성 검사
+				클라이언트측 유효성 검사 
+			*/
+		}
+	}
+	
+</script>
+</head>
+<body>
+	<h2>자바 스크립트 밸리데이션</h2>
+	<form name="myForm" action="#" method="get" onsubmit="return validateForm()">
+		name : <input type="text" name="fname">
+		<input type="submit" value="제출">
+	</form>
+</body>
+</html>

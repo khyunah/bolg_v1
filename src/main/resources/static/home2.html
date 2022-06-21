@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h2>Java Script HTML DOM</h2>
+	
+	<p>태그 이름으로 요소 찾기</p>
+	<p>여기는 구문 안입니다.</p>
+	
+	<p class="intro">Hello JavaScript</p>
+	
+	<script type="text/javascript">
+	
+		/*
+		// const - 상수
+		const element1 = document.getElementsByTagName("p");
+		element1[0].innerHTML = "index 0번째 수정";
+		
+		const element2 = document.getElementsByClassName("intro");
+		element2[0].innerHTML = "HELLO WORLD"
+		*/
+		
+		const x = document.querySelectorAll("p.intro");
+		
+		x[0].innerHTML = "적용이 되나요";
+		
+	</script>
+</body>
+</html>
