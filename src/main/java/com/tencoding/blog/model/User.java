@@ -32,7 +32,7 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // 프로젝트에 연결된 DB의 넘버링 전략(오토인크리먼트)을 따라가겠다는 설정.
 	private int id;
 
-	@Column(nullable = false, length = 30) // null 안됨, 길이 30못넘음
+	@Column(nullable = false, length = 30, unique = true) // null 안됨, 길이 30못넘음
 	private String username;
 
 	@Column(nullable = false, length = 100)

@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> 
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -15,10 +16,8 @@
 
     <!-- Latest compiled JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-    
   </head>
   <body>
-
     <nav class="navbar navbar-expand-md bg-dark navbar-dark">
       <!-- Brand -->
       <a class="navbar-brand" href="/blog/">블로그</a>
@@ -31,19 +30,30 @@
       <!-- Navbar links -->
       <div class="collapse navbar-collapse" id="collapsibleNavbar">
         <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="/blog/user/login_form">로그인</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/blog/user/join_form">회원가입</a>
-          </li>
+        <!-- 세션의 principal이 비어있으면 실행한다  -->
+        <c:choose>
+        	<c:when test="${empty sessionScope.principal}">
+              <li class="nav-item">
+                <a class="nav-link" href="/blog/user/login_form">로그인</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="/blog/user/join_form">회원가입</a>
+              </li>
+            </c:when>
+            <c:otherwise>
+              <li class="nav-item">
+                <a class="nav-link" href="/blog/user/login_form">글쓰기</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="/blog/user/join_form">로그아웃</a>
+              </li>
+            </c:otherwise>
+        </c:choose>
         </ul>
       </div>
     </nav>
-    <br/>
-    <!-- 
-    <script type="text/javascript">
-    	let el_box = document.querySelector("#box");
-    	el_box.textContent = "hello";
-    </script>
-     -->
+    <br />
+  </body>
+</html>
