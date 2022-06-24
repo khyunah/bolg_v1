@@ -13,14 +13,12 @@ public class UserController {
 	@Autowired
 	private HttpSession httpSession;
 
-	// /blog/user/login_form
-	@GetMapping("/login_form")
+	@GetMapping("/auth/login_form")
 	public String loginForm() {
 		return "user/login_form";
 	}
-	
-	// a 태그는 get만
-	@GetMapping("/join_form")
+
+	@GetMapping("/auth/join_form")
 	public String join() {
 		return "user/join_form";
 	}

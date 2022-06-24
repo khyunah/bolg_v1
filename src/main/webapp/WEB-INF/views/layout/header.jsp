@@ -3,6 +3,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <sec:authorize access="isAuthenticated()">
     Welcome Back, <sec:authentication property="name"/>
+    Welcome Back, <sec:authentication property="principal" var="principal"/>
 </sec:authorize>
 
 <!DOCTYPE html>
@@ -39,11 +40,11 @@
         <c:choose>
         	<c:when test="${empty principal}">
               <li class="nav-item">
-                <a class="nav-link" href="/login_form">로그인</a>
+                <a class="nav-link" href="/auth/login_form">로그인</a>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="/join_form">회원가입</a>
+                <a class="nav-link" href="/auth/join_form">회원가입</a>
               </li>
             </c:when>
             <c:otherwise>

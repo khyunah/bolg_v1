@@ -22,7 +22,7 @@ let index = {
 		$.ajax({
 			// 서버측에 회원가입 요청 (로직)
 			type: "POST",
-			url: "/api/user",
+			url: "/auth/joinProc",
 			// 자바와 js는 오브젝트 타입이 다른데 밑의 코드가 자동으로 파싱해준다.
 			data: JSON.stringify(data),
 			contentType: "application/json; charset=utf-8",
