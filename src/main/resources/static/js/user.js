@@ -22,7 +22,7 @@ let index = {
 		$.ajax({
 			// 서버측에 회원가입 요청 (로직)
 			type: "POST",
-			url: "/blog/api/user",
+			url: "/api/user",
 			// 자바와 js는 오브젝트 타입이 다른데 밑의 코드가 자동으로 파싱해준다.
 			data: JSON.stringify(data),
 			contentType: "application/json; charset=utf-8",
@@ -39,7 +39,7 @@ let index = {
 			alert("회원가입이 완료 되었습니다.");
 			
 			// 주소 요청해서 이동
-			location.href = "/blog";
+			location.href = "/";
 			
 		}).fail(function(error){
 			// 통신 실패시
@@ -57,13 +57,13 @@ let index = {
 		
 		$.ajax({
 			type: "POST",
-			url: "/blog/api/user/login",
+			url: "/api/user/login",
 			data: JSON.stringify(data),
 			contentType: "application/json; charset=utf-8",
 			dataType: "json"
 		}).done(function(data, textStatus, xhr){
 			alert("로그인이 완료되었습니다.");
-			location.href = "/blog";
+			location.href = "/";
 			console.log(data);
 		}).fail(function(error){
 			alert("로그인에 실패했습니다.");

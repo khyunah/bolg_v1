@@ -20,7 +20,7 @@
   <body>
     <nav class="navbar navbar-expand-md bg-dark navbar-dark">
       <!-- Brand -->
-      <a class="navbar-brand" href="/blog/">블로그</a>
+      <a class="navbar-brand" href="/">블로그</a>
 
       <!-- Toggler/collapsibe Button -->
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -34,20 +34,24 @@
         <c:choose>
         	<c:when test="${empty sessionScope.principal}">
               <li class="nav-item">
-                <a class="nav-link" href="/blog/user/login_form">로그인</a>
+                <a class="nav-link" href="/login_form">로그인</a>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="/blog/user/join_form">회원가입</a>
+                <a class="nav-link" href="/join_form">회원가입</a>
               </li>
             </c:when>
             <c:otherwise>
               <li class="nav-item">
-                <a class="nav-link" href="/blog/user/login_form">글쓰기</a>
+                <a class="nav-link" href="/board/form">글쓰기</a>
+              </li>
+              
+              <li class="nav-item">
+                <a class="nav-link" href="/user/form">회원정보</a>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="/blog/user/logout">로그아웃</a>
+                <a class="nav-link" href="/logout">로그아웃</a>
               </li>
             </c:otherwise>
         </c:choose>
