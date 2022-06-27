@@ -27,5 +27,11 @@ public class BoardService {
 	public Page<Board> getBoardList(Pageable pageable){
 		return boardRepository.findAll(pageable);
 	}
+	
+	public Board boardDetail(int boardId) {
+		return boardRepository.findById(boardId).orElseThrow(() -> {
+			return new IllegalArgumentException("해당 글은 찾을 수 없습니다.");
+		});
+	}
 
 }
