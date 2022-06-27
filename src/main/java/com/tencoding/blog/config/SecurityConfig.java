@@ -32,15 +32,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter { // 상속
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable()	// csrf 를 껏다 자바스크립트를 이용해서 던질수 있음 
 		.authorizeRequests()
-		.antMatchers("/auth/**", "/", "/js/**", "/css/**", "/image/**")	// 다 막지만 해당 주소 허용 
-		.permitAll()
-		.anyRequest()
-		.authenticated()
+		.antMatchers("/auth/**", "/", "/js/**", "/css/**", "/image/**")	// 시큐리티 설정이 다 막지만 해당 리소스에 대한 권한을 설정하겠다.
+		.permitAll() // 위에 설정한 리소스에 접근을 인증절차 없이 허용한다. 
+		.anyRequest() // .anyRequest().authenticated()
+		.authenticated() // ㅡ> 모든 리소스를 의미, 접근허용 리소스 및 인증 후 특정 레벨의 권한을 가진 사용자만 접근가능한 리소스를 설정한다. 
+		// 그외에 나머지 리소스들은 무조건 인증을 완료해야 접근이 가능하다. 
 		.and()
-		.formLogin()
-		.loginPage("/auth/login_form")	// 인증 안되어 있으면 로그인 페이지로 가라고 지시하는 중 
-		.loginProcessingUrl("/auth/loginProc") // 로그인의 요청 주소
-		.defaultSuccessUrl("/") // 로그인 성공시 어디로 보낼지
+		.formLogin() // 일반적인 로그인 방식을 사용하겠다는 의미. 
+		.loginPage("/auth/login_form")	// 로그인을 해야하면 해당 주소로 로그인 페이지가 넘어감 ( 설정하지 않으면 시큐리티에서 제공하는 기본 로그인 화면으로 넘어감 )
+		.loginProcessingUrl("/auth/loginProc") // 로그인 인증 처리 하는 필터가 호출되어 아이디와 비번을 받아와서 인증처리 수행 된다 ( UsernamePasswordAuthenticationFilter 필터가 수행됨 )
+		.defaultSuccessUrl("/") // 로그인 성공시 어디로 보낼지, 설정하지 않은 디폴트 값은 / 이다. 
 		;
 		
 		// 스프링 시큐리티가 해당 주소로 요청이오면 가로채서 대신 요청을 해준다. 
