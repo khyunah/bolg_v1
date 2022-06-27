@@ -21,6 +21,8 @@
 
     <!-- Latest compiled JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    
+
   </head>
   <body>
     <nav class="navbar navbar-expand-md bg-dark navbar-dark">
@@ -48,11 +50,11 @@
             </c:when>
             <c:otherwise>
               <li class="nav-item">
-                <a class="nav-link" href="/board/form">글쓰기</a>
+                <a class="nav-link" href="/board/save_form">글쓰기</a>
               </li>
               
               <li class="nav-item">
-                <a class="nav-link" href="/user/form">회원정보</a>
+                <a class="nav-link" href="/user/update_form">회원정보</a>
               </li>
 
               <li class="nav-item">

@@ -16,6 +16,7 @@ public class PrincipalDetailService implements UserDetailsService {
 	UserRepository userRepository;
 
 	// 유저가 있는지 없는지 확인하는 역할
+	// 유저가 있다면 시큐리티 전용 세션에 넣어준다. ( return을 하면 넣어줌 )
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User principal = userRepository.findByUsername(username).orElseThrow(() -> {
