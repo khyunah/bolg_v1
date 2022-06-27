@@ -22,11 +22,11 @@ public class UserController {
 	public String join() {
 		return "user/join_form";
 	}
-	
-	@GetMapping("/logout")
-	public String logout() {
-		// 세션 정보 제거 
-		httpSession.invalidate();
-		return "redirect:/";
-	}
+//	
+//	@GetMapping("/logout")
+//	public String logout() {
+//		// 세션 정보 제거 
+//		httpSession.invalidate();
+//		return "redirect:/";
+//	}
 }
