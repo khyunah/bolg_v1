@@ -55,7 +55,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter { // 상속
 	// 같은 해시로 암호화해서 디비에 있는 해시 값과 비교할 수 있다. 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		// 1. userDetailService에 들어간 객체를 만들어 주어야 한다. 데이터베이스에 접근해서 유저가 있는지 없는지 확인
+		// 1. userDetailService에 들어갈 객체를 만들어 주어야 한다. 데이터베이스에 접근해서 유저가 있는지 없는지 확인
 		// 2. passwordEncoder에 우리가 사용하는 해시 함수를 알려주어야 한다.  비밀번호가 맞는지 아닌지 확인 
 		auth.userDetailsService(principalDetailService).passwordEncoder(encodePWD());
 		

@@ -1,6 +1,8 @@
 package com.tencoding.blog.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,4 +22,10 @@ public class BoardService {
 		board.setUserId(user);
 		boardRepository.save(board);
 	}
+	
+	@Transactional
+	public Page<Board> getBoardList(Pageable pageable){
+		return boardRepository.findAll(pageable);
+	}
+
 }
