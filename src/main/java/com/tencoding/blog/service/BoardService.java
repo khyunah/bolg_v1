@@ -28,10 +28,16 @@ public class BoardService {
 		return boardRepository.findAll(pageable);
 	}
 	
+	@Transactional
 	public Board boardDetail(int boardId) {
 		return boardRepository.findById(boardId).orElseThrow(() -> {
 			return new IllegalArgumentException("해당 글은 찾을 수 없습니다.");
 		});
+	}
+	
+	@Transactional
+	public void deleteById(int id) {
+		boardRepository.deleteById(id);
 	}
 
 }

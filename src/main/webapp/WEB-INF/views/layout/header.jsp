@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> 
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<!--  로그인 세션 정보 저장 했음  -->
 <sec:authorize access="isAuthenticated()">
     Welcome Back, <sec:authentication property="principal" var="principal"/>
 </sec:authorize>
