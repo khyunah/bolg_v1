@@ -43,10 +43,10 @@ let index = {
 			console.log("textStatus : " + textStatus);
 			console.log("data : " + data);
 			
-			alert("회원가입이 완료 되었습니다.");
+			//alert("회원가입이 완료 되었습니다.");
 			
 			// 주소 요청해서 이동
-			location.href = "/";
+			//location.href = "/";
 			
 		}).fail(function(error){
 			// 통신 실패시
