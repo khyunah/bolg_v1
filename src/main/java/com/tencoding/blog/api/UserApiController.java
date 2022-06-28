@@ -2,7 +2,10 @@ package com.tencoding.blog.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,20 +20,28 @@ public class UserApiController {
 	@Autowired // DI
 	private UserService userService;
 
-	// 기본 데이터 파싱 전략
-	// 'application/x-www-form-urlencoded;charset=UTF-8'  키밸류값구조이기때문에 @RequestBody 사용하면 안됨 @RequestBody는 json형식이라 형식이 맞지않음
-	@PostMapping("/auth/joinProc")
-	public ResponseDto<Integer> save(User user) {
-		System.out.println("------------------");
-		System.out.println(user.getUsername());
-		System.out.println("------------------");
-		int result = userService.saveUser(user);
-		return new ResponseDto<>(HttpStatus.OK.value(), result);
-	}
-	
+	@Autowired
+	private AuthenticationManager authenticationManager; // ㅡ> 미리 메모리에 올라가있는 녀석이 아니라서오류가 난다.
+	// 필터단에서 먼저 메모리에 올려주기 위해서 securityConfig에 @Bean으로 등록을 해놔야한다.
+
 	@PutMapping("/user")
-	public ResponseDto<Integer> update(@RequestBody User user){
+	public ResponseDto<Integer> update(@RequestBody User user) {
 		userService.updateUser(user);
+
+		// 회원정보 수정후 principal 바꿔주기 작업
+
+		// 강제로 Authentication 객체를 만들고 securityContext안에 집어넣으면 된다.
+		// 1. Authentication 객체를 생성 해야한다.
+		// 2. AuthenticationManager를 메모리에 올려서 authenticate 메서드를 사용해서 Authentication 객체를
+		// 저장한다.
+		// 3. 세션안에 SecurityContextHolder 안에 getContext()안에 setAuthentication() 에다가
+		// Authentication를 넣어주면 된다.
+
+		// 1, 2.
+		Authentication authentication = authenticationManager
+				.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
+		// 3.
+		SecurityContextHolder.getContext().setAuthentication(authentication);
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}
 
