@@ -18,6 +18,12 @@ spring:
     url: jdbc:mysql://localhost:3306/blog?serverTime=Asia/Seoul
     username: ten
     password: 1q2w3e4r5t!
+    hikari:
+      connectionTimeout: 30000
+      maximumPoolSize: 10
+      maxLifetime: 1800000
+      poolName: HikariCP
+      readOnly: false
   
   jpa:
     open-in-view: true

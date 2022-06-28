@@ -29,4 +29,9 @@ public class UserController {
 //		httpSession.invalidate();
 //		return "redirect:/";
 //	}
+	
+	@GetMapping("/user/update_form")
+	public String updateForm() {
+		return "user/update_form";
+	}
 }

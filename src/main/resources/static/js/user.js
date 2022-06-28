@@ -5,8 +5,15 @@ let index = {
 			this.save();
 		});
 		
+		//전통적인 로그인 방식 때 사용한 부분
+		/*
 		$("#btn-login").bind("click", () => {
 			this.login();
+		});
+		*/
+		
+		$("#btn-update").bind("click", () => {
+			this.update();
 		});
 	},
 	
@@ -49,6 +56,7 @@ let index = {
 		});
 	},
 	
+	/*
 	login: function(){
 		let data = {
 			username: $("#username").val(),
@@ -69,6 +77,32 @@ let index = {
 			alert("로그인에 실패했습니다.");
 			console.log(error);
 		});
+	}
+	*/
+	
+	update: function(){
+		let data = {
+			id: $("#id").val(),
+			password: $("#password").val(),
+			email: $("#email").val()
+		}
+		
+		$.ajax({
+			type: "PUT",
+			url: "/user",
+			data: JSON.stringify(data),
+			contentType: "application/json; charset=utf-8",
+			dataType: "json"
+		}).done(function(data){
+			if(data.status){
+				alert("회원 정보 수정이 완료되었습니다.");
+				location.href = "/";
+			}
+		}).fail(function(error){
+			alert("회원 정보 수정이 실패하였습니다.");
+		});
+		
+		console.log(data);
 	}
 	
 }
