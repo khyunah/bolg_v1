@@ -17,6 +17,8 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -54,6 +56,8 @@ public class Board {
 	// mappedBy는 연관관계의 주인이 아니다. ( FK가 아니다. )
 	// DB에 컬럼을 만들지 마시오.
 	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER)
+	// 무한 참조 방지를 위해서 @JsonIgnoreProperties
+	@JsonIgnoreProperties({"board", "user"})	// reply 안에 있는 board getter를 무시해라 라는 명령 
 	private List<Reply> replys;
 
 	@CreationTimestamp
