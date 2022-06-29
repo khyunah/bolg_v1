@@ -58,13 +58,15 @@ public class BoardService {
 	}
 	
 	@Transactional
-	public void writeReply(User user, int boardId, Reply requestReply) {
+	public Reply writeReply(User user, int boardId, Reply requestReply) {
 		requestReply.setUser(user);
 		Board board = boardRepository.findById(boardId).orElseThrow(() -> {
 			return new IllegalArgumentException("댓글 쓰기 실패 : 게시글이 존재하지 않습니다.");
 		});
 		requestReply.setBoard(board);
-		replyRepository.save(requestReply);
+		Reply replyEntity = replyRepository.save(requestReply);
+//		System.out.println("데이터 확인 댓글 : " + replyEntity); // 순환 참조 오류 
+		return replyEntity; 
 	}
 
 }

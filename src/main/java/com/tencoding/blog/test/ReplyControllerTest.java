@@ -39,7 +39,7 @@ public class ReplyControllerTest {
 	 * 
 	 * 해결방법은
 	 * 1. @JsonIgnoreProperties 사용 하기 
-	 *   @JsonIgnoreProperties("board") 이런식
+	 *   @JsonIgnoreProperties("board") 이런
 	 */
 	@GetMapping("/test/reply")
 	public List<Reply> getReply(){

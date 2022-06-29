@@ -102,16 +102,38 @@ let index = {
 			contentType: "application/json; charset=utf-8",
 			// 응답 받는 데이터 타입 
 			dataType: "json"
-		}).done(function(response){
+		}).done(function(response) {
+			if(response.status) {
+				addReplyElement(response.data)
+			} else {
+				
+			}
+			
+			/*
 			// 자바스크립트에서 숫자 1은 true이다 
 			if(response.status){
 				alert("댓글 작성이 완료 되었습니다.");
 				location.href = `/board/${data.boardId}`;
 			}
+			*/
 		}).fail(function(error){
 			alert("댓글 작성에 실패 하였습니다.");
 		});
 	}
+}
+
+function addReplyElement(reply){
+	let childElement = `
+			<li class="list-group-item d-flex justify-content-between" id="reply-1">
+				<div>${reply.content}</div>
+				<div class="d-flex">
+					<div>작성자 : ${reply.user.username}&nbsp;&nbsp;</div>
+					<button class="badge badge-danger">삭제</button>
+				</div>
+			</li>
+	`;
+	
+	$("#reply-box").prepend(childElement);
 }
 
 index.init();

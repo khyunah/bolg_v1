@@ -45,11 +45,11 @@ public class BoardApiController {
 	}
 	
 	@PostMapping("/api/board/{boardId}/reply")
-	public ResponseDto<Integer> replySave(@PathVariable int boardId, @RequestBody Reply reply,
+	public ResponseDto<Reply> replySave(@PathVariable int boardId, @RequestBody Reply reply,
 			@AuthenticationPrincipal PrincipalDetail detail){
-		boardService.writeReply(detail.getUser(), boardId, reply);
+		Reply replyEntity = boardService.writeReply(detail.getUser(), boardId, reply);
 		
-		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
+		return new ResponseDto<Reply>(HttpStatus.OK.value(), replyEntity);	// 무한 참조 걸려서 오류 발생
 	}
 
 }
