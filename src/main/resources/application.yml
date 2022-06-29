@@ -39,3 +39,12 @@ spring:
   jackson:
     serialization:
       fail-on-empty-beans: false
+      
+  security:
+    user:
+      name: test
+      password: 1234
+      
+tenco:
+  key: 78dd02729a16ae52847cb05cb16d1ac7e7a051b44324647e261053cf623617ebdc283de7638b79b390c9875370a5e8b4007c332ff78cda996d0c9295abcf268c
+  

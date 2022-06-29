@@ -1,11 +1,9 @@
 package com.tencoding.blog.service;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
 
 import com.tencoding.blog.model.RollType;
 import com.tencoding.blog.model.User;
@@ -49,6 +47,15 @@ public class UserService {
 		String hashPassword = encoder.encode(rawPassword);
 		userEntity.setPassword(hashPassword);
 		userEntity.setEmail(user.getEmail());
+	}
+	
+	// 유저 있나체크
+	@Transactional(readOnly = true)
+	public User searchUser(String username) {
+		User userEntity = userRepository.findByUsername(username).orElseGet(() -> {
+			return new User();
+		});
+		return userEntity;
 	}
 
 }
