@@ -40,7 +40,7 @@
 	<ul class="list-group" id="reply-box">
 	<!-- 반복 예정, id값 내가 만든 id면 하이픈 두개쓰기 reply--hyunah 이런식  -->
 		<c:forEach var="reply" items="${board.replys}">
-			<li class="list-group-item d-flex justify-content-between" id="reply-1">
+			<li class="list-group-item d-flex justify-content-between" id="reply-${reply.id}">
 				<div>${reply.content}</div>
 				<div class="d-flex">
 					<div>작성자 : ${reply.user.username}&nbsp;&nbsp;</div>
