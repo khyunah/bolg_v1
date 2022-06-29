@@ -7,14 +7,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tencoding.blog.model.Board;
+import com.tencoding.blog.model.Reply;
 import com.tencoding.blog.model.User;
 import com.tencoding.blog.repository.BoardRepository;
+import com.tencoding.blog.repository.ReplyRepository;
 
 @Service
 public class BoardService {
 	
 	@Autowired
 	private BoardRepository boardRepository;
+	
+	@Autowired
+	private ReplyRepository replyRepository;
 	
 	@Transactional
 	public void write(Board board, User user) { // title, content 넘어옴 
@@ -50,6 +55,16 @@ public class BoardService {
 		boardEntity.setContent(board.getContent());
 		
 		// 더티 체킹 - 트랜젝셔널
+	}
+	
+	@Transactional
+	public void writeReply(User user, int boardId, Reply requestReply) {
+		requestReply.setUser(user);
+		Board board = boardRepository.findById(boardId).orElseThrow(() -> {
+			return new IllegalArgumentException("댓글 쓰기 실패 : 게시글이 존재하지 않습니다.");
+		});
+		requestReply.setBoard(board);
+		replyRepository.save(requestReply);
 	}
 
 }

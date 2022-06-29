@@ -29,7 +29,7 @@
 	<div class="card">
 		<div>
 			<div class="card-body"><textarea rows="1" class="form-control" id="reply-content"></textarea></div>
-			<div class="card-footer"><button type="button" id="reply-save" class="btn btn-primary">등록</button></div>
+			<div class="card-footer"><button type="button" id="btn-reply-save" class="btn btn-primary">등록</button></div>
 		</div>
 	</div>
 	<br/>
