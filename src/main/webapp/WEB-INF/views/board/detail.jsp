@@ -29,7 +29,7 @@
 	<div class="card">
 		<div>
 			<div class="card-body"><textarea rows="1" class="form-control" id="reply-content"></textarea></div>
-			<div class="card-footer"><button type="button" id="btn-reply-save" class="btn btn-primary">등록</button></div>
+			<div class="card-footer"><button type="button" id="btn-reply-save" class="btn btn-primary" onclick="index.replySave(${principal.user.id})">등록</button></div>
 		</div>
 	</div>
 	<br/>
@@ -44,7 +44,10 @@
 				<div>${reply.content}</div>
 				<div class="d-flex">
 					<div>작성자 : ${reply.user.username}&nbsp;&nbsp;</div>
-					<button class="badge badge-danger">삭제</button>
+					<!-- eq : 같은가? -->
+					<c:if test="${reply.user.id eq principal.user.id}">
+						<button onclick="index.replyDelete(${board.id}, ${reply.id})" class="badge badge-danger">삭제</button>
+					</c:if>
 				</div>
 			</li>
 		</c:forEach>

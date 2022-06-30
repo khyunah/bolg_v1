@@ -67,5 +67,10 @@ public class BoardService {
 		Reply replyEntity = replyRepository.save(requestReply);
 		return replyEntity;
 	}
+	
+	@Transactional
+	public void deleteReplyById(int replyId) {
+		replyRepository.deleteById(replyId);
+	}
 
 }

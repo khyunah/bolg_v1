@@ -11,10 +11,11 @@ let index = {
 		$("#btn-update").bind("click", () => {
 			this.update();
 		});
-		
+		/*
 		$("#btn-reply-save").bind("click", () => {
 			this.replySave();
 		});
+		*/
 	}, 
 	
 	save: function(){
@@ -84,7 +85,7 @@ let index = {
 	},
 	
 	// 댓글 등록
-	replySave: function(){
+	replySave: function(id){
 		// 데이터 가져오기 ( boardId 해당 게시글의 id )
 		let data = {
 			boardId: $("#board-id").text(),
@@ -106,21 +107,39 @@ let index = {
 			// 자바스크립트에서 숫자 1은 true이다 
 			if(response.status){
 				console.log(response.data);
-				addReplyElement(response.data);
+				addReplyElement(response.data, id);
 			}
 		}).fail(function(error){
 			alert("댓글 작성에 실패 하였습니다.");
 		});
+	},
+	
+	replyDelete: function(boardId, replyId){
+		$.ajax({
+			type: "DELETE",
+			url: `/api/board/${boardId}/reply/${replyId}`,
+			dataType: "json"
+		}).done(function(response){
+			console.log(response);
+			alert("댓글 삭제 성공");
+			location.href = `/board/${boardId}`;
+		}).fail(function(error){
+			console.log(error);
+			alert("댓글 삭제 실패");
+		});
 	}
 }
 
-function addReplyElement(reply){
+function addReplyElement(reply, id){
 	let childElement = `
 		<li class="list-group-item d-flex justify-content-between" id="reply-${reply.id}">
 			<div>${reply.content}</div>
 			<div class="d-flex">
 				<div>작성자 : ${reply.user.username}&nbsp;&nbsp;</div>
-				<button class="badge badge-danger">삭제</button>
+				<!-- eq : 같은가? -->
+				<c:if test="${reply.user.id == id}">
+					<button onclick="index.replyDelete(${reply.board.id}, ${reply.id})" class="badge badge-danger">삭제</button>
+				</c:if>
 			</div>
 		</li>
 	`;
