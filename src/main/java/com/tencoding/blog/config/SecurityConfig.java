@@ -39,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter { // 상속
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable()	// csrf 를 껏다 자바스크립트를 이용해서 던질수 있음 
 		.authorizeRequests()
-		.antMatchers("/auth/**", "/", "/js/**", "/css/**", "/image/**")	// 시큐리티 설정이 다 막지만 해당 리소스에 대한 권한을 설정하겠다.
+		.antMatchers("/auth/**", "/", "/js/**", "/css/**", "/image/**", "/dummy/**")	// 시큐리티 설정이 다 막지만 해당 리소스에 대한 권한을 설정하겠다.
 		.permitAll() // 위에 설정한 리소스에 접근을 인증절차 없이 허용한다. 
 		.anyRequest() // .anyRequest().authenticated()
 		.authenticated() // ㅡ> 모든 리소스를 의미, 접근허용 리소스 및 인증 후 특정 레벨의 권한을 가진 사용자만 접근가능한 리소스를 설정한다. 

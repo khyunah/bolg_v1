@@ -5,6 +5,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
@@ -93,11 +94,11 @@ public class DummyControllerTest {
 	// 페이징 처리
 	// http://localhost:9090/blog/dummy/user?page=0
 	@GetMapping("/dummy/user")
-	public List<User> pageList(@PageableDefault(size = 5, sort = "id", direction = Direction.DESC) Pageable pageable){
+	public Page<User> pageList(@PageableDefault(size = 5, sort = "id", direction = Direction.DESC) Pageable pageable){
 //		Page<User> page = userRepository.findAll(pageable);
 //		List<User> user = page.getContent();
 		
-		List<User> user = userRepository.findAll(pageable).getContent();
+		Page<User> user = userRepository.findAll(pageable);
 		// Page 타입으로 리턴할때는 getContent()빼주기.
 		return user;
 	}
