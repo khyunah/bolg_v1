@@ -20,6 +20,21 @@
   	<li class="page-item ${pageable.first ? isDisabled : isNotDisabled}">
   		<a class="page-link" href="/?page=${pageable.number - 1}">Previous</a>
   	</li>
+  	
+  	<!-- 동적으로 생성되는 페이지 번호 버튼 만들어주기  -->
+  	<c:forEach var="page" items="${pageCountList}">
+  	
+  		<!-- 동적으로 active 처리 해주기 -->
+  		<c:choose>
+			<c:when test="${pageable.number + 1 == page}">
+				<li class="page-item active"><a class="page-link" href="/?page=${page-1}">${page}</a></li>
+			</c:when>  		
+			<c:otherwise>
+				<li class="page-item"><a class="page-link" href="/?page=${page-1}">${page}</a></li>
+			</c:otherwise>
+  		</c:choose>
+  	</c:forEach>
+  	
   	<li class="page-item ${pageable.last ? isDisabled : isNotDisabled}">
   		<a class="page-link" href="/?page=${pageable.number + 1}">Next</a>
   	</li>
