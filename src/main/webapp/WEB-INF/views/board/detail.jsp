@@ -12,6 +12,7 @@
 	
 	<br/><br/>
 	<div>
+		<input type="hidden" id="principalId" value="${principal.user.id}">
 		글 번호 : <span id="board-id"><i>${board.id}</i></span><br/>
 		글 작성자 : <span id=""><i>${board.userId.username}</i></span>
 	</div>
@@ -44,7 +45,9 @@
 				<div>${reply.content}</div>
 				<div class="d-flex">
 					<div>작성자 : ${reply.user.username}&nbsp;&nbsp;</div>
-					<button class="badge badge-danger">삭제</button>
+					<c:if test="${reply.user.id eq principal.user.id}">
+						<button class="badge badge-danger" onclick="index.deleteReply(${board.id}, ${reply.id})">삭제</button>
+					</c:if>
 				</div>
 			</li>
 		</c:forEach>

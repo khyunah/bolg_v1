@@ -111,8 +111,23 @@ let index = {
 		}).fail(function(error){
 			alert("댓글 작성에 실패 하였습니다.");
 		});
+	}, 
+	
+	deleteReply: function(boardId, replyId){
+		
+		$.ajax({
+			type: "DELETE",
+			url: `/api/board/${replyId}/reply/${boardId}`
+		}).done(function(){
+			alert("댓글이 삭제되었습니다.");
+			location.href = `/board/${boardId}`
+		}).fail(function(){
+			alert("댓글이 삭제 되지 않았습니다.");
+		});
 	}
 }
+
+let principalId = $("#principalId").val();
 
 function addReplyElement(reply){
 	let childElement = `
@@ -120,7 +135,9 @@ function addReplyElement(reply){
 			<div>${reply.content}</div>
 			<div class="d-flex">
 				<div>작성자 : ${reply.user.username}&nbsp;&nbsp;</div>
-				<button class="badge badge-danger">삭제</button>
+				<c:if test="${reply.user.id == principalId}">
+					<button class="badge badge-danger" onclick="index.deleteReply(${reply.board.id}, ${reply.id})">삭제</button>
+				</c:if>
 			</div>
 		</li>
 	`;
