@@ -1,6 +1,7 @@
 package com.tencoding.blog.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tencoding.blog.model.Board;
 import com.tencoding.blog.service.BoardService;
@@ -81,6 +83,17 @@ public class BoardController {
 	public String updateForm(@PathVariable int id, Model model) {
 		model.addAttribute("board", boardService.boardDetail(id));
 		return "/board/update_form";
+	}
+	
+	/*
+	 * 이 방법은 결과는 나오나 페이지 처리가 안됨 ( 실패 사례 ) 
+	 */
+	@GetMapping("/board/search")
+	public String searchBoard(@RequestParam String q, Model model, 
+			@PageableDefault(size = 2, sort = "id", direction = Direction.DESC) Pageable pageable) {
+		Page<Board> boards = boardService.searchBoardByTitle(q, pageable);
+		model.addAttribute("pageable", boards);
+		return "index";
 	}
 
 }

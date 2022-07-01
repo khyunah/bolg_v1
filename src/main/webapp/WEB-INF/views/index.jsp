@@ -2,9 +2,17 @@
 <%@ include file="layout/header.jsp" %>
 
 <div class="container">
+
+	<div class="d-flex m-2 justify-content-end">
+		<form class="form-inline" action="/board/search" method="get">
+		  <input type="text" class="form-control" name="q" value="" placeholder="검색어를 입력해주세요." id="email">
+		  <button type="submit" class="btn btn-primary ml-2">검색</button>
+		</form>
+	</div>
+
 	<c:forEach var="board" items="${pageable.content}">
 		<div class="card m-2">
-			<div class="card body">
+			<div class="card-body">
 				<h4 class="card-title">${board.title}</h4>
 				<a href="/board/${board.id}" class="btn btn-primary">상세보기</a>
 			</div>
