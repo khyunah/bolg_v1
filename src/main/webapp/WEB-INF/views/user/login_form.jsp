@@ -4,11 +4,11 @@
 	<form action="/auth/loginProc" method="post">
 	  <div class="form-group">
 	    <label for="username">user name:</label>
-	    <input type="text" class="form-control" placeholder="Enter username" id="username" name="username"/>
+	    <input type="text" class="form-control" value="tenco" placeholder="Enter username" id="username" name="username"/>
 	  </div>
 	  <div class="form-group">
 	    <label for="password">Password:</label>
-	    <input type="password" class="form-control" placeholder="Enter password" id="password" name="password"/>
+	    <input type="password" class="form-control" value="asd123" placeholder="Enter password" id="password" name="password"/>
 	  </div>
 	  <div class="form-group form-check">
 	    <label class="form-check-label"> 
