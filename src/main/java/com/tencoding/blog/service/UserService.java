@@ -42,11 +42,14 @@ public class UserService {
 			return new IllegalArgumentException("회원정보가 없습니다.");
 		});
 		
-		// 해시 암호화 처리 해야함
-		String rawPassword = user.getPassword();
-		String hashPassword = encoder.encode(rawPassword);
-		userEntity.setPassword(hashPassword);
-		userEntity.setEmail(user.getEmail());
+		if(userEntity.getOauth() == null || userEntity.getOauth().equals("")) {
+			// 해시 암호화 처리 해야함
+			String rawPassword = user.getPassword();
+			String hashPassword = encoder.encode(rawPassword);
+			userEntity.setPassword(hashPassword);
+			userEntity.setEmail(user.getEmail());
+		}
+
 	}
 	
 	// 유저 있나체크

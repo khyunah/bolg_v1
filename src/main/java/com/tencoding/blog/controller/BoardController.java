@@ -7,11 +7,17 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
+import com.tencoding.blog.auth.PrincipalDetail;
+import com.tencoding.blog.dto.ResponseDto;
 import com.tencoding.blog.model.Board;
 import com.tencoding.blog.service.BoardService;
 
@@ -66,6 +72,12 @@ public class BoardController {
 	public String updateForm(@PathVariable int id, Model model) {
 		model.addAttribute("board", boardService.boardDetail(id));
 		return "/board/update_form";
+	}
+	
+	@PostMapping("/api/board/write")
+	public String save(Board board, @AuthenticationPrincipal PrincipalDetail detail) {
+		boardService.write(board, detail.getUser());
+		return "redirect:/";
 	}
 	
 	/*

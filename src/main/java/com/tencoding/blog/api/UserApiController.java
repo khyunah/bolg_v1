@@ -26,6 +26,10 @@ public class UserApiController {
 
 	@PutMapping("/user")
 	public ResponseDto<Integer> update(@RequestBody User user) {
+		
+		// 카카오가 수정이 들어오면 무시 
+		// 기존 수정 들어오면 처리 
+		
 		userService.updateUser(user);
 
 		// 회원정보 수정후 principal 바꿔주기 작업

@@ -3,26 +3,26 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!--  로그인 세션 정보 저장 했음  -->
 <sec:authorize access="isAuthenticated()">
-    Welcome Back, <sec:authentication property="principal" var="principal"/>
+    <sec:authentication property="principal" var="principal"/>
 </sec:authorize>
 
 <!DOCTYPE html>
 <html>
   <head>
+  
     <meta charset="UTF-8" />
+    <meta name="${_csrf.parameterName}" content="${_csrf.token}">
+    <meta name="_csrf_header" content="${_csrf.headerName}">
+    
     <title>Insert title here</title>
-    <!-- Latest compiled and minified CSS -->
+  <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" />
-
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
     <!-- Popper JS -->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-
     <!-- Latest compiled JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-    
 
   </head>
   <body>
