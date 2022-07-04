@@ -126,7 +126,14 @@ let index = {
 	},
 	
 	replyDelete: function(boardId, replyId){
+		
+		let token = $("meta[name='_csrf']").attr("content");	// 속성 attr 
+		let header = $("meta[name='_csrf_header']").attr("content");
+		
 		$.ajax({
+			beforeSend : function(xhr) {
+				xhr.setRequestHeader(header, token)				
+			},
 			type: "DELETE",
 			url: `/api/board/${boardId}/reply/${replyId}`,
 			dataType: "json"
