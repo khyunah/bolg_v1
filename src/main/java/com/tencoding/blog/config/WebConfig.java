@@ -20,6 +20,11 @@ public class WebConfig implements WebMvcConfigurer {
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		WebMvcConfigurer.super.addResourceHandlers(registry);
 		
+		System.out.println("---------------------");
+		System.out.println("file:///" + uploadFolder);
+		System.out.println("---------------------");
+		// file:///C:/springImageDir/tencoblog/upload/6d624354-21ea-4414-b85a-282970cefc53_dog 1.jpg
+		
 		// 가상 경로를 만들어서 실제 경로에 접근할수 있는 
 		registry.addResourceHandler("/upload/**")	// url 패턴을 만들어준다. /upload라는 주소가 있으면 낚아챈다.
 		.addResourceLocations("file:///" + uploadFolder)	// 슬러시 /// 세개 , 실제 물리적인 경로 파일이 들어오면 이 주소로 변환 시켜준다.
