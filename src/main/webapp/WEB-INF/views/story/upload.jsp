@@ -10,7 +10,8 @@
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 			<div class="input-group mt-3">
 				<!-- 파일은 바이너리로 날라간다.  -->
-				<input type="file" name="file" class="custom-file-input" id="customFile" required="required">
+				<input type="file" name="file" class="custom-file-input" id="customFile" required="required"
+						width="200" height="150">
 				<label class="custom-file-label" for="customFile"></label>
 			</div>
 			
@@ -31,9 +32,8 @@
 <script>
 	// Add the following code if you want the name of the file appear on select 
 	$(".custom-file-input").bind("change", function() {	// 변화가 있다면
-		console.log($(this).val());
 	  let fileName = $(this).val().split("\\").pop(); // 파일찾는 창 실행한다. 파일이름을 나눠서 변수에 담는다
-	  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+	  $(this).siblings(".custom-file-label").html(fileName);
 	});
 	// siblings 형제태그
 </script>
