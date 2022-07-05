@@ -2,20 +2,36 @@ package com.tencoding.blog.controller;
 
 import java.io.IOException;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
+
+import com.tencoding.blog.auth.PrincipalDetail;
+import com.tencoding.blog.dto.RequestFileDto;
+import com.tencoding.blog.model.Image;
+import com.tencoding.blog.service.StoryService;
 
 @Controller
 @RequestMapping("/story")
 public class StoryController {
 	
+	@Autowired
+	private StoryService storyService;
+	
 	// 스토리 화면 
 	@GetMapping("/home")
-	public String storyHome() {
+	public String storyHome(Model model, @PageableDefault(size = 10, sort = "id", direction = Direction.DESC) Pageable pageable) {
+		Page<Image> imagePage = storyService.getImageList(pageable);
+		System.out.println(imagePage.getContent().toString());
+		model.addAttribute("imagePage", imagePage);
 		return "story/home";
 	}
 	
@@ -27,14 +43,18 @@ public class StoryController {
 	
 	// 업로드 
 	@PostMapping("/image/upload")
-	@ResponseBody
-	public String storyImageUpload(MultipartFile file, String storyText) {	 // name값과 매개변수명이 같아야한다.
-		System.out.println(file.getContentType()); // 이미지 타입
-		System.out.println(file.getName()); // form 태그의 name
-		System.out.println(file.getOriginalFilename());
-		System.out.println(file.getSize()); // byte 사이즈
+//	public String storyImageUpload(MultipartFile file, String storyText) { // name값과 매개변수명이 같아야한다.
+	public String storyImageUpload(RequestFileDto fileDto, @AuthenticationPrincipal PrincipalDetail principalDetail) {	 
+		
+		storyService.imageUpload(fileDto, principalDetail.getUser());
+		
+		// MultipartFile file 
+		System.out.println(fileDto.getFile().getContentType()); // 이미지 타입
+		System.out.println(fileDto.getFile().getName()); // form 태그의 name
+		System.out.println(fileDto.getFile().getOriginalFilename());
+		System.out.println(fileDto.getFile().getSize()); // byte 사이즈
 		try {
-			System.out.println(file.getBytes().toString());
+			System.out.println(fileDto.getFile().getBytes().toString());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -62,6 +82,6 @@ public class StoryController {
 		// 숫자를 2진수 단위로 관리한다. 
 		// 그래서 컴퓨터는 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024 와 같이 2의 제곱으로 된 단위를 사용한다. 
 		
-		return "upload test";
+		return "redirect:/story/home";
 	}
 }
