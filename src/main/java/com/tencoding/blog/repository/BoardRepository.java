@@ -9,4 +9,6 @@ import com.tencoding.blog.model.Board;
 public interface BoardRepository extends JpaRepository<Board, Integer> {
 	// select * from board where title like '%밸류%';
 	Page<Board> findByTitleContaining(String title, Pageable pageable);
+	
+	
 }
